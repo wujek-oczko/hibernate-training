@@ -10,61 +10,51 @@ import org.hibernate.cfg.Configuration;
 
 public class ManageEmployee {
     private static SessionFactory factory;
+
     public static void main(String[] args) {
 
-        try {
-            factory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Failed to create sessionFactory object." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+        factory = buildSessionFactory();
 
         ManageEmployee ME = new ManageEmployee();
-        /* Let us have a set of certificates for the first employee  */
-        HashSet set1 = new HashSet();
-        set1.add(new Certificate("MCA"));
-        set1.add(new Certificate("MBA"));
-        set1.add(new Certificate("PMP"));
 
-        /* Add employee records in the database */
-        Integer empID1 = ME.addEmployee("Manoj", "Kumar", 4000, set1);
-
-        /* Another set of certificates for the second employee  */
-        HashSet set2 = new HashSet();
-        set2.add(new Certificate("BCA"));
-        set2.add(new Certificate("BA"));
-
-        /* Add another employee record in the database */
-        Integer empID2 = ME.addEmployee("Dilip", "Kumar", 3000, set2);
+        /* Add few employee records in database */
+        Integer empID1 = ME.addEmployee("Zara", "Ali", 1000);
+        Integer empID2 = ME.addEmployee("Daisy", "Das", 5000);
+        Integer empID3 = ME.addEmployee("John", "Paul", 10000);
 
         /* List down all the employees */
         ME.listEmployees();
 
-        /* Update employee's salary records */
+        /* Update employee's records */
         ME.updateEmployee(empID1, 5000);
 
         /* Delete an employee from the database */
         ME.deleteEmployee(empID2);
 
-        /* List down all the employees */
+        /* List down new list of the employees */
         ME.listEmployees();
-
     }
 
-    /* Method to add an employee record in the database */
-    public Integer addEmployee(String fname, String lname, int salary, Set cert){
+    private static SessionFactory buildSessionFactory() {
+        return new Configuration().configure().addPackage("com.wujq.hibernate").buildSessionFactory();
+    }
+
+    /* Method to CREATE an employee in the database */
+    public Integer addEmployee(String fname, String lname, int salary) {
         Session session = factory.openSession();
         Transaction tx = null;
         Integer employeeID = null;
 
         try {
             tx = session.beginTransaction();
-            Employee employee = new Employee(fname, lname, salary);
-            employee.setCertificates(cert);
+            Employee employee = new Employee();
+            employee.setFirstName(fname);
+            employee.setLastName(lname);
+            employee.setSalary(salary);
             employeeID = (Integer) session.save(employee);
             tx.commit();
         } catch (HibernateException e) {
-            if (tx!=null) tx.rollback();
+            if (tx != null) tx.rollback();
             e.printStackTrace();
         } finally {
             session.close();
@@ -72,64 +62,60 @@ public class ManageEmployee {
         return employeeID;
     }
 
-    /* Method to list all the employees detail */
-    public void listEmployees( ){
+    /* Method to  READ all the employees */
+    public void listEmployees() {
         Session session = factory.openSession();
         Transaction tx = null;
+
         try {
             tx = session.beginTransaction();
             List employees = session.createQuery("FROM Employee").list();
-            for (Iterator iterator1 = employees.iterator(); iterator1.hasNext();){
-                Employee employee = (Employee) iterator1.next();
+            for (Iterator iterator = employees.iterator(); iterator.hasNext(); ) {
+                Employee employee = (Employee) iterator.next();
                 System.out.print("First Name: " + employee.getFirstName());
                 System.out.print("  Last Name: " + employee.getLastName());
                 System.out.println("  Salary: " + employee.getSalary());
-                Set certificates = employee.getCertificates();
-                for (Iterator iterator2 = certificates.iterator(); iterator2.hasNext();){
-                    Certificate certName = (Certificate) iterator2.next();
-                    System.out.println("Certificate: " + certName.getName());
-                }
             }
             tx.commit();
         } catch (HibernateException e) {
-            if (tx!=null) tx.rollback();
+            if (tx != null) tx.rollback();
             e.printStackTrace();
         } finally {
             session.close();
         }
     }
 
-    /* Method to update salary for an employee */
-    public void updateEmployee(Integer EmployeeID, int salary ){
+    /* Method to UPDATE salary for an employee */
+    public void updateEmployee(Integer EmployeeID, int salary) {
         Session session = factory.openSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            Employee employee = (Employee)session.get(Employee.class, EmployeeID);
-            employee.setSalary( salary );
+            Employee employee = session.get(Employee.class, EmployeeID);
+            employee.setSalary(salary);
             session.update(employee);
             tx.commit();
         } catch (HibernateException e) {
-            if (tx!=null) tx.rollback();
+            if (tx != null) tx.rollback();
             e.printStackTrace();
         } finally {
             session.close();
         }
     }
 
-    /* Method to delete an employee from the records */
-    public void deleteEmployee(Integer EmployeeID){
+    /* Method to DELETE an employee from the records */
+    public void deleteEmployee(Integer EmployeeID) {
         Session session = factory.openSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            Employee employee = (Employee)session.get(Employee.class, EmployeeID);
+            Employee employee = session.get(Employee.class, EmployeeID);
             session.delete(employee);
             tx.commit();
         } catch (HibernateException e) {
-            if (tx!=null) tx.rollback();
+            if (tx != null) tx.rollback();
             e.printStackTrace();
         } finally {
             session.close();

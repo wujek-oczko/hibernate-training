@@ -1,13 +1,26 @@
 package com.wujq.hibernate;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
+@Table(name="EMPLOYEE")
 public class Employee {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "salary")
     private int salary;
-    private Set certificate;
+
+//    private Set certificate;
 
     public Employee() {
     }
@@ -18,13 +31,13 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Set getCertificates() {
-        return certificate;
-    }
+//    public Set getCertificates() {
+//        return certificate;
+//    }
 
-    public void setCertificates(Set certificate) {
-        this.certificate = certificate;
-    }
+//    public void setCertificates(Set certificate) {
+//        this.certificate = certificate;
+//    }
 
     public int getId() {
         return id;
