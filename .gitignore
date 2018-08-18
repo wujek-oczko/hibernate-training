@@ -1,0 +1,11 @@
+
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/dataSources/
+.idea/libraries/
+.idea/modules.xml
+.idea/vcs.xml
+src/test/
+target/classes/com/wujq/hibernate/Employee.class
+target/classes/com/wujq/hibernate/ManageEmployee.class
+target/generated-sources/
