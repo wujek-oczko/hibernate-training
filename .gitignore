@@ -1,6 +1,3 @@
-
 .idea/
-src/test/
-target/classes/com/wujq/hibernate/Employee.class
-target/classes/com/wujq/hibernate/ManageEmployee.class
-target/generated-sources/
+*.iml
+target/
