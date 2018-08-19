@@ -6,7 +6,12 @@
 
     <groupId>com.wujq</groupId>
     <artifactId>hibernate-training</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>training</module>
+        <module>quiz</module>
+    </modules>
 
     <dependencies>
         <dependency>
