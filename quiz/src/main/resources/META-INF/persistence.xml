@@ -7,7 +7,10 @@
 
     <persistence-unit name="Hibernate_JPA" transaction-type="RESOURCE_LOCAL">
 
-        <class>com.wujq.quiz.Employee</class>
+        <class>com.wujq.quiz.model.Employee</class>
+        <class>com.wujq.quiz.model.Staff</class>
+        <class>com.wujq.quiz.model.NonTeachingStaff</class>
+        <class>com.wujq.quiz.model.TeachingStaff</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 

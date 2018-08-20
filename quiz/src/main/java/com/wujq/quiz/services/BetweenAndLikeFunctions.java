@@ -1,6 +1,6 @@
 package com.wujq.quiz.services;
 
-import com.wujq.quiz.Employee;
+import com.wujq.quiz.model.Employee;
 
 import java.util.List;
 import javax.persistence.EntityManager;

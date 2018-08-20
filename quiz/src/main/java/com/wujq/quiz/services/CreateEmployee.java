@@ -3,7 +3,7 @@ package com.wujq.quiz.services;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import com.wujq.quiz.Employee;
+import com.wujq.quiz.model.Employee;
 
 public class CreateEmployee {
 
