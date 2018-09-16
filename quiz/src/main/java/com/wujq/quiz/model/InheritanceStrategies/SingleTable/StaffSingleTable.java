@@ -1,6 +1,4 @@
-package com.wujq.quiz.model;
-
-import java.io.Serializable;
+package com.wujq.quiz.model.InheritanceStrategies.SingleTable;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -10,26 +8,27 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table
-@Inheritance( strategy = InheritanceType.SINGLE_TABLE )
-@DiscriminatorColumn( name = "type" )
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 
-public class Staff implements Serializable {
+public class StaffSingleTable implements Serializable {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
 
-    public Staff(String name) {
-        super( );
+    public StaffSingleTable(String name) {
+        super();
         this.name = name;
     }
 
-    public Staff( ) {
-        super( );
+    public StaffSingleTable() {
+        super();
     }
 
     public int getId() {

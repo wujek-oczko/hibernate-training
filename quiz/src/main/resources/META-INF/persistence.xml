@@ -8,9 +8,9 @@
     <persistence-unit name="Hibernate_JPA" transaction-type="RESOURCE_LOCAL">
 
         <class>com.wujq.quiz.model.Employee</class>
-        <class>com.wujq.quiz.model.Staff</class>
-        <class>com.wujq.quiz.model.NonTeachingStaff</class>
-        <class>com.wujq.quiz.model.TeachingStaff</class>
+        <class>com.wujq.quiz.model.InheritanceStrategies.SingleTable.StaffSingleTable</class>
+        <class>com.wujq.quiz.model.InheritanceStrategies.SingleTable.NonTeachingStaffSingleTable</class>
+        <class>com.wujq.quiz.model.InheritanceStrategies.SingleTable.TeachingStaffSingleTable</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
@@ -26,4 +26,70 @@
         </properties>
 
     </persistence-unit>
+
+    <persistence-unit name="Hibernate_JPA_Joined" transaction-type="RESOURCE_LOCAL">
+
+        <class>com.wujq.quiz.model.InheritanceStrategies.JoinedTable.StaffJoined</class>
+        <class>com.wujq.quiz.model.InheritanceStrategies.JoinedTable.NonTeachingStaffJoined</class>
+        <class>com.wujq.quiz.model.InheritanceStrategies.JoinedTable.TeachingStaffJoined</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/quiz"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="postgres"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+
+    </persistence-unit>
+
+
+    <persistence-unit name="Hibernate_JPA_TPC" transaction-type="RESOURCE_LOCAL">
+
+        <class>com.wujq.quiz.model.InheritanceStrategies.TablePerClass.TPCStaff</class>
+        <class>com.wujq.quiz.model.InheritanceStrategies.TablePerClass.TPCTeachingStaff</class>
+        <class>com.wujq.quiz.model.InheritanceStrategies.TablePerClass.TPCNonTeachingStaff</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/quiz"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="postgres"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+
+    </persistence-unit>
+
+
+    <persistence-unit name="Hibernate_JPA_MappedSuperclass" transaction-type="RESOURCE_LOCAL">
+
+        <class>com.wujq.quiz.model.InheritanceStrategies.MappedSuperclassClass.StaffMappedSuperclass</class>
+        <class>com.wujq.quiz.model.InheritanceStrategies.MappedSuperclassClass.TeachingStaffMappedSuperclass</class>
+        <class>com.wujq.quiz.model.InheritanceStrategies.MappedSuperclassClass.NonTeachingStaffMappedSuperclass</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/quiz"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="postgres"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+
+    </persistence-unit>
+
 </persistence>

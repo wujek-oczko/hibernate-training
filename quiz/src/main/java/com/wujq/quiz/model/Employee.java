@@ -18,14 +18,14 @@ public class Employee {
     private String deg;
 
     public Employee(int id, String employeeName, double salary, String deg) {
-        super( );
+        super();
         this.id = id;
         this.employeeName = employeeName;
         this.salary = salary;
         this.deg = deg;
     }
 
-    public Employee( ) {
+    public Employee() {
         super();
     }
 
